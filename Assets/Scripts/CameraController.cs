@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Controls for the camera
-public class FlockCamera : MonoBehaviour {
+public class CameraController : MonoBehaviour {
     // The camera to move to the player
     [SerializeField]
     private GameObject player;

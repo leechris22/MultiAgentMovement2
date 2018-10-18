@@ -7,7 +7,7 @@ public class PlayerController : NPCController {
     private Vector2 move;
 
     // Move the player
-    void FixedUpdate() {
+    protected void FixedUpdate() {
         // Take Mouse Input if left button is down
         if (Input.GetMouseButton(0)) {
             move = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -20,7 +20,7 @@ public class PlayerController : NPCController {
         // Add movement and bind the speed
         rb.AddForce(move);
         rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxSpeedL);
-        rb.MoveRotation(-Mathf.Atan2(rb.velocity.x, rb.velocity.y) * Mathf.Rad2Deg);
+        updateMovement(ai.Output(target.data), Time.deltaTime);
         updateData();
     }
 }
