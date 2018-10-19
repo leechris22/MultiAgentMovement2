@@ -84,9 +84,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f5d502761869f448aa11cd155957d71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ai: {fileID: 114446364315461288}
   rb: {fileID: 0}
-  target: {fileID: 0}
+  data:
+    position: {x: 0, y: 0}
+    orientation: 0
+    velocity: {x: 0, y: 0}
+    rotation: 0
+  target: {fileID: 114860844905218268}
+  ai: {fileID: 114446364315461288}
   maxSpeedL: 0
   maxAccelerationL: 0
   maxSpeedA: 0
