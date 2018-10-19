@@ -17,16 +17,8 @@ public class LevelManager : MonoBehaviour {
     // Set level loading material
     [SerializeField]
     protected GameObject BoidSpawner;
-
-    // On initialization
-    private void Awake() {
-        //
-    }
-
-    // Update is called once per frame
-    private void Update() {
-        //
-    }
+    [SerializeField]
+    protected GameObject Path;
 
     // Show the spawn rectangle
     private void OnDrawGizmosSelected() {

@@ -10,8 +10,7 @@ public class NPCController : MonoBehaviour {
     [HideInInspector]
     public Kinematic data;
     public NPCController target;
-    [SerializeField]
-    protected AI ai;
+    public AI ai;
 
     // Bounds linear changes
     public float maxSpeedL;
