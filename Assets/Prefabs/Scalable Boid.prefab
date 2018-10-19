@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 114750606393134536}
   - component: {fileID: 114949662962719230}
   - component: {fileID: 114739758306112422}
+  - component: {fileID: 114510266326819352}
   - component: {fileID: 114141499959730474}
   - component: {fileID: 114890766331645422}
   - component: {fileID: 114331423091261066}
@@ -236,8 +237,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61cea51f4884a45439fff8b78df4e160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radius: 5
+  offset: 5
   avoidDistance: 5
-  lookahead: 5
+  lookahead: 3
 --- !u!114 &114331423091261066
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -252,6 +255,20 @@ MonoBehaviour:
   slowRadiusA: 50
   stopRadiusA: 6
   timeToTarget: 0.1
+--- !u!114 &114510266326819352
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1489302214474246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c774227d14b9a2641a9abc210e6aa59d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targets: []
+  threshold: 3
+  decayCoefficient: 10
 --- !u!114 &114739758306112422
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -280,9 +297,11 @@ MonoBehaviour:
   weights:
   - 1
   - 1
+  - 1
   ai:
   - {fileID: 114949662962719230}
   - {fileID: 114739758306112422}
+  - {fileID: 114510266326819352}
 --- !u!114 &114847011905960504
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -330,6 +349,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf9eafdfcbda2f049b3dc3b962bcf415, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slowRadiusL: 5
+  slowRadiusL: 1
   stopRadiusL: 0
   timeToTarget: 0.1
