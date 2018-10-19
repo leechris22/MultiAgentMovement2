@@ -6,7 +6,11 @@ using UnityEngine;
 public class RayCasting : Seek {
     // Initialize necessary variables
     [SerializeField]
-	private float avoidDistance;
+    private float radius;
+    [SerializeField]
+    private float offset;
+    [SerializeField]
+    private float avoidDistance;
     [SerializeField]
     private float lookahead;
 
@@ -16,23 +20,23 @@ public class RayCasting : Seek {
         int layermask = ~(1 << 9);
 
         // Set up main ray
-        RaycastHit2D hit1 = Physics2D.Raycast(player.data.position, player.data.velocity, lookahead, layermask);
+        Vector2 position = player.data.position - player.data.velocity.normalized * offset;
+        RaycastHit2D hit1 = Physics2D.Raycast(position, player.data.velocity, lookahead + radius, layermask);
+        Debug.DrawRay(position, player.data.velocity.normalized * (lookahead + radius), Color.black);
 
         // Set up whisker ray 1
-        Vector2 whiskerposition = ((Vector3)player.data.velocity + transform.up + transform.right).normalized;
-        RaycastHit2D hit2 = Physics2D.Raycast(player.data.position, whiskerposition, lookahead/2, layermask);
+        Vector2 direction = (player.data.velocity - Vector2.Perpendicular(player.data.velocity) * 0.7f).normalized;
+        RaycastHit2D hit2 = Physics2D.Raycast(position, direction, lookahead / 3 + radius, layermask);
+        Debug.DrawRay(position, direction.normalized * (lookahead/3 + radius), Color.black);
 
         // Set up whisker ray 2
-        whiskerposition = ((Vector3)player.data.velocity + transform.up - transform.right).normalized;
-        RaycastHit2D hit3 = Physics2D.Raycast(player.data.position, whiskerposition, lookahead/2, layermask);
+        direction = (player.data.velocity + Vector2.Perpendicular(player.data.velocity) * 0.7f).normalized;
+        RaycastHit2D hit3 = Physics2D.Raycast(position, direction, lookahead / 3 + radius, layermask);
+        Debug.DrawRay(position, direction.normalized * (lookahead/3 + radius), Color.black);
 
         // Set up hit collision
-        if (hit1.collider) {
-            target.position += hit1.point + hit1.normal * avoidDistance;
-        } else if (hit2.collider) {
-            target.position += hit2.point + hit2.normal * avoidDistance;
-        } else if (hit3.collider) {
-            target.position += hit3.point + hit3.normal * avoidDistance;
+        if (hit1.collider || hit2.collider || hit3.collider) {
+            target.position += hit1.point + (hit1.normal + hit2.normal + hit3.normal) * avoidDistance;
         } else {
             return new Steering();
         }

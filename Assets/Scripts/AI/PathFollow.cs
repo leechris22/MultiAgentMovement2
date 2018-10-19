@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Moves the player along a path
-[RequireComponent(typeof(Arrive), typeof(Face))]
+[RequireComponent(typeof(Arrive))]
 public class PathFollow : AI {
     // Initialize necessary variables
     [HideInInspector]
@@ -24,7 +24,6 @@ public class PathFollow : AI {
         // Move to point until player reaches point, then target next point
         if (Vector2.Distance(path[current].position, player.data.position) > pathRadius) {
             steering += GetComponent<Arrive>().Output(path[current]);
-            steering += GetComponent<Face>().Output(path[current]);
         } else {
             current++;
         }
@@ -36,8 +35,8 @@ public class PathFollow : AI {
     // Obtain the nearest point in the path
     public void GetNearest() {
         float distance = Mathf.Infinity;
-        for (int i = 0; i < path.Length; i++) {
-            if (Vector2.Distance(path[i].position, player.data.position) < distance && current < i) {
+        for (int i = current; i < current+30; i++) {
+            if (i < path.Length && Vector2.Distance(path[i].position, player.data.position) < distance) {
                 distance = Vector2.Distance(path[i].position, player.data.position);
                 current = i;
 
