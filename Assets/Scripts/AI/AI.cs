@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Base class for all AI
 public class AI : MonoBehaviour {
     // Initialize necessary variables
     protected NPCController player;

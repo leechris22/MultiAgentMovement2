@@ -7,6 +7,7 @@ public class NPCController : MonoBehaviour {
     // Store variables for objects
     [HideInInspector]
     public Rigidbody2D rb;
+    [HideInInspector]
     public Kinematic data;
     public NPCController target;
     [SerializeField]

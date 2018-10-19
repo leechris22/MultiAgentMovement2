@@ -11,8 +11,6 @@ public class PathPlacer : MonoBehaviour {
 
     // Hold the linerenderer and point prefab
     private LineRenderer line;
-    [SerializeField]
-    private GameObject PointPrefab;
     [HideInInspector]
     public Kinematic[] path;
 
