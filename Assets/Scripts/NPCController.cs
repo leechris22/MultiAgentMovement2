@@ -32,10 +32,12 @@ public class NPCController : MonoBehaviour {
         updateData();
     }
 
+    // Update the kinematic data
     protected void updateData() {
         data = new Kinematic(rb.position, rb.rotation, rb.velocity, rb.angularVelocity);
     }
-
+    
+    // Update the rigidbody accelerations
     protected void updateMovement(Steering steering, float time) {
         // Bound the acceleration
         steering.linear = Vector2.ClampMagnitude(steering.linear, maxAccelerationL);

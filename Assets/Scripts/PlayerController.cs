@@ -24,10 +24,11 @@ public class PlayerController : NPCController {
         updateData();
     }
 
+    // On collision with Boid, kill the Boid
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.CompareTag("Boid")) {
             //GameObject.FindWithTag("Manager").GetComponent<ScalableManager>().Reorganize(collision.gameObject);
-            GameObject.FindWithTag("Manager").GetComponent<EmergentManager>().Reorganize(collision.gameObject);
+            //GameObject.FindWithTag("Manager").GetComponent<EmergentManager>().Reorganize(collision.gameObject);
         }
     }
 }

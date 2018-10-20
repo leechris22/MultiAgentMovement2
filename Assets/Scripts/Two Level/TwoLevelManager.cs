@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Handles all Scalable Formation actions
-public class ScalableManager : LevelManager {
+// Handles all Two Level Formation actions
+public class TwoLevelManager : LevelManager {
     // Set prefabs
     [SerializeField]
     private GameObject PointPrefab;
@@ -40,7 +40,7 @@ public class ScalableManager : LevelManager {
     }
 
     // Update is called once per frame
-    private void Update () {
+    private void Update() {
         if (Input.GetKeyDown(KeyCode.Alpha1)) {
             foreach (GameObject Boid in Boids) {
                 Boid.GetComponent<PathFollow>().current = leader.GetComponent<PathFollow>().current;
@@ -118,7 +118,7 @@ public class ScalableManager : LevelManager {
         }
     }
 
-    // Destroys Boid and changes formation
+    // Destroys Boid and change formation
     public void Reorganize(GameObject DeadBoid) {
         size--;
         Boids.Remove(DeadBoid);

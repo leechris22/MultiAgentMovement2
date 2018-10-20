@@ -100,7 +100,7 @@ public class EmergentManager : LevelManager {
         List<GameObject> targets = new List<GameObject>();
         targets.Add(leader);
 
-        // Sets the target for each Boid with no target as the closest Boid with a target
+        // Sets the target for Boids targeting DeadBoid as the closest Boid that target chains to the leader
         foreach (GameObject Boid in Boids) {
             if (Boid.GetComponent<NPCController>().target == DeadBoid) {
                 GameObject closeBoid = null;
@@ -124,7 +124,7 @@ public class EmergentManager : LevelManager {
         }
     }
 
-    // Destroys Boid and change formation
+    // Destroys Boid and change targets
     public void Reorganize(GameObject DeadBoid) {
         size--;
         Boids.Remove(DeadBoid);
