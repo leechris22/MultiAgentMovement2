@@ -23,4 +23,11 @@ public class PlayerController : NPCController {
         updateMovement(ai.Output(target.data), Time.deltaTime);
         updateData();
     }
+
+    private void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.CompareTag("Boid")) {
+            //GameObject.FindWithTag("Manager").GetComponent<ScalableManager>().Reorganize(collision.gameObject);
+            GameObject.FindWithTag("Manager").GetComponent<EmergentManager>().Reorganize(collision.gameObject);
+        }
+    }
 }

@@ -5,8 +5,6 @@ using UnityEngine;
 // Create a cone to detect collisions
 public class ConeCheck : Separate {
     // Initialize necessary variables
-    [HideInInspector]
-    public List<NPCController> targets;
     [SerializeField]
     private float threshold;
 

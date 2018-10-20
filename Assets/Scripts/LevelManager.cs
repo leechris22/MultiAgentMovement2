@@ -9,7 +9,6 @@ public class LevelManager : MonoBehaviour {
     protected GameObject BoidPrefab;
 
     // Set necessary game objects
-    [SerializeField]
     protected List<GameObject> Boids;
     [SerializeField]
     protected NPCController Player;

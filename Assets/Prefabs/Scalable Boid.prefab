@@ -48,15 +48,15 @@ GameObject:
   - component: {fileID: 114510266326819352}
   - component: {fileID: 114141499959730474}
   - component: {fileID: 114890766331645422}
-  - component: {fileID: 114331423091261066}
+  - component: {fileID: 114940879062503980}
   - component: {fileID: 114247175132622834}
   m_Layer: 9
   m_Name: Scalable Boid
-  m_TagString: Untagged
+  m_TagString: Boid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4653675527788606
 Transform:
   m_ObjectHideFlags: 1
@@ -240,21 +240,7 @@ MonoBehaviour:
   radius: 5
   offset: 5
   avoidDistance: 5
-  lookahead: 3
---- !u!114 &114331423091261066
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1489302214474246}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d9232892a3fe9a41aee330b6dec18cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slowRadiusA: 50
-  stopRadiusA: 6
-  timeToTarget: 0.1
+  lookahead: 5
 --- !u!114 &114510266326819352
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -267,8 +253,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targets: []
-  threshold: 3
-  decayCoefficient: 10
+  threshold: 2
+  decayCoefficient: 5
 --- !u!114 &114739758306112422
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -338,6 +324,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   path: []
   pathRadius: 1
+  current: 0
+--- !u!114 &114940879062503980
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1489302214474246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a32ce39f49905244bc6e7f353157ac4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slowRadiusA: 50
+  stopRadiusA: 6
+  timeToTarget: 0.1
 --- !u!114 &114949662962719230
 MonoBehaviour:
   m_ObjectHideFlags: 1

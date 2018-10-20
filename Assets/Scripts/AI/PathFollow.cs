@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Moves the player along a path
-[RequireComponent(typeof(Arrive))]
+[RequireComponent(typeof(Arrive), typeof(FaceForward))]
 public class PathFollow : AI {
     // Initialize necessary variables
     [HideInInspector]
     public Kinematic[] path;
     [SerializeField]
     private float pathRadius;
-    private int current = 0;
+    [HideInInspector]
+    public int current = 0;
 
     // Define Output
     override public Steering Output(Kinematic target) {
@@ -24,6 +25,7 @@ public class PathFollow : AI {
         // Move to point until player reaches point, then target next point
         if (Vector2.Distance(path[current].position, player.data.position) > pathRadius) {
             steering += GetComponent<Arrive>().Output(path[current]);
+            steering += GetComponent<FaceForward>().Output(path[current]);
         } else {
             current++;
         }
