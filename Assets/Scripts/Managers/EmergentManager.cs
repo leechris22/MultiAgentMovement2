@@ -26,7 +26,7 @@ public class EmergentManager : LevelManager {
     }
 
     // Update is called once per frame
-    private void Update() {
+    /*private void Update() {
         if (Input.GetKeyDown(KeyCode.Alpha1)) {
             foreach (GameObject Boid in Boids) {
                 Boid.GetComponent<PathFollow>().current = leader.GetComponent<PathFollow>().current;
@@ -40,7 +40,7 @@ public class EmergentManager : LevelManager {
                 Boid.GetComponent<MultiBehavior>().ai[1] = Boid.GetComponent<Align>();
             }
         }
-    }
+    }*/
 
     // Spawns Scalable Boids
     protected void SpawnBoid() {

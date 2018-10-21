@@ -21,15 +21,15 @@ public class NPCController : MonoBehaviour {
     public float maxAccelerationA;
 
     // On initialization
-    private void Awake() {
+    protected void Awake() {
         rb = GetComponent<Rigidbody2D>();
         updateData();
     }
 
     // Update the movement
     private void FixedUpdate() {
-        updateMovement(ai.Output(target.data), Time.deltaTime);
         updateData();
+        updateMovement(ai.Output(target.data));
     }
 
     // Update the kinematic data
@@ -38,7 +38,7 @@ public class NPCController : MonoBehaviour {
     }
     
     // Update the rigidbody accelerations
-    protected void updateMovement(Steering steering, float time) {
+    protected void updateMovement(Steering steering) {
         // Bound the acceleration
         steering.linear = Vector2.ClampMagnitude(steering.linear, maxAccelerationL);
         float angularAcceleration = Mathf.Abs(steering.angular);

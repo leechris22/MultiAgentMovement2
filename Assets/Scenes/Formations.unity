@@ -2389,8 +2389,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2011309102}
   - component: {fileID: 2011309104}
-  - component: {fileID: 2011309103}
   - component: {fileID: 2011309101}
+  - component: {fileID: 2011309105}
+  - component: {fileID: 2011309103}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Manager
@@ -2413,10 +2414,7 @@ MonoBehaviour:
   Player: {fileID: 992408370}
   BoidSpawner: {fileID: 1832773377}
   Path: {fileID: 1026544502}
-  PointPrefab: {fileID: 0}
-  formationFunction: {fileID: 0}
-  size: 0
-  spacing: 0
+  size: 12
 --- !u!4 &2011309102
 Transform:
   m_ObjectHideFlags: 0
@@ -2449,17 +2447,33 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2011309100}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dab15e428aa7a764eb68245c270aa0d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BoidPrefab: {fileID: 1489302214474246, guid: a30d7ba5c0bc582418ee980431bc52db, type: 2}
+  BoidPrefab: {fileID: 1046263664743266, guid: ac620fc57dd9c324b8d873338d8280cb, type: 2}
   Player: {fileID: 992408370}
   BoidSpawner: {fileID: 1832773377}
   Path: {fileID: 1026544502}
-  PointPrefab: {fileID: 1558175498488128, guid: 15506dcb24783c24ca796fb6c997864e,
-    type: 2}
+  formationFunction: {fileID: 2011309103}
+  size: 12
+  spacing: 2
+--- !u!114 &2011309105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2011309100}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c0df7e6f7536c747a4675776adb2709, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BoidPrefab: {fileID: 1991953426895768, guid: 78d32b74a31ab6346864cae72738ad54, type: 2}
+  Player: {fileID: 992408370}
+  BoidSpawner: {fileID: 1832773377}
+  Path: {fileID: 1026544502}
   formationFunction: {fileID: 2011309103}
   size: 12
   spacing: 2

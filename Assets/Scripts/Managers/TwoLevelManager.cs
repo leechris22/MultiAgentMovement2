@@ -2,15 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Handles all Scalable Formation actions
-public class ScalableManager : LevelManager {
-    // Set prefabs
-    [SerializeField]
-    private GameObject PointPrefab;
-
+// Handles all Two Level Formation actions
+public class TwoLevelManager : LevelManager {
     // Formation creation
     [SerializeField]
-    private ScalableFormation formationFunction;
+    private Formation formationFunction;
     [SerializeField]
     private int size;
     [SerializeField]
@@ -18,14 +14,13 @@ public class ScalableManager : LevelManager {
     private GameObject[] formation;
 
     // Leader
+    [SerializeField]
     private GameObject leader;
-    private Vector2 leaderPos;
-    private int leaderIndex = 0;
 
     // On initialization
     private void Start() {
         // Get the formation creator
-        formationFunction = GetComponent<ScalableFormation>();
+        formationFunction = GetComponent<Formation>();
 
         // Initialize Boids
         Boids = new List<GameObject>();
@@ -34,13 +29,12 @@ public class ScalableManager : LevelManager {
         }
 
         // Set the formation
-        leaderPos = BoidSpawner.transform.position;
         SetLeader();
         SetFollowers();
     }
 
-    // Update is called once per frame
-    private void Update () {
+/*    // Update is called once per frame
+    private void Update() {
         if (Input.GetKeyDown(KeyCode.Alpha1)) {
             foreach (GameObject Boid in Boids) {
                 Boid.GetComponent<PathFollow>().current = leader.GetComponent<PathFollow>().current;
@@ -54,14 +48,13 @@ public class ScalableManager : LevelManager {
                 Boid.GetComponent<MultiBehavior>().ai[1] = Boid.GetComponent<Align>();
             }
         }
-    }
+    }*/
 
     // Spawns Scalable Boids
     protected void SpawnBoid() {
         Vector3 size = BoidSpawner.transform.localScale;
         Vector3 position = BoidSpawner.transform.position + new Vector3(Random.Range(-size.x / 2, size.x / 2), Random.Range(-size.y / 2, size.y / 2), 0);
         GameObject temp = Instantiate(BoidPrefab, position, BoidSpawner.transform.rotation);
-        temp.GetComponent<PathFollow>().path = Path.GetComponent<PathPlacer>().path;
         foreach (GameObject Boid in Boids) {
             Boid.GetComponent<Separate>().targets.Add(temp.GetComponent<NPCController>());
             temp.GetComponent<Separate>().targets.Add(Boid.GetComponent<NPCController>());
@@ -69,26 +62,14 @@ public class ScalableManager : LevelManager {
         Boids.Add(temp);
     }
 
-    // Sets the leader
+    // Sets the properties of the leader
     private void SetLeader() {
-        // Finds the closest Boid from the last leader's position
-        GameObject closeBoid = null;
-        float distance = Mathf.Infinity;
-        foreach (GameObject Boid in Boids) {
-            if (Vector2.Distance(Boid.transform.position, leaderPos) < distance) {
-                distance = Vector2.Distance(Boid.transform.position, leaderPos);
-                closeBoid = Boid;
-            }
-        }
-
-        // Set the leader and its behavior
-        leader = closeBoid;
-        leader.GetComponent<NPCController>().ai = leader.GetComponent<RayCastPath>();
-        leader.GetComponent<PathFollow>().current = leaderIndex;
+        leader.GetComponent<PathFollow>().path = Path.GetComponent<PathPlacer>().path;
+        leader.transform.position = BoidSpawner.transform.position;
         leader.GetComponent<NPCController>().maxSpeedL /= 2;
     }
 
-    // Sets the position of all Boids except the leader
+    // Sets the position of all Boids
     private void SetFollowers() {
         // Delete the old formation and create a new one
         if (formation != null) {
@@ -96,11 +77,10 @@ public class ScalableManager : LevelManager {
                 Destroy(Point);
             }
         }
-        formation = formationFunction.CreateFormation(size, spacing);
+        formation = formationFunction.CreateFormation(size, spacing, true);
 
-        // Set the positions for each Boid on the formation except the leader
+        // Set the positions for each Boid on the formation
         List<GameObject> tempBoids = new List<GameObject>(Boids);
-        tempBoids.Remove(leader);
         foreach (GameObject Point in formation) {
             Point.transform.SetParent(leader.transform, false);
 
@@ -123,11 +103,6 @@ public class ScalableManager : LevelManager {
         size--;
         Boids.Remove(DeadBoid);
         if (size != 0) {
-            if (DeadBoid == leader) {
-                leaderPos = leader.transform.position;
-                leaderIndex = leader.GetComponent<PathFollow>().current;
-                SetLeader();
-            }
             SetFollowers();
         }
         Destroy(DeadBoid);

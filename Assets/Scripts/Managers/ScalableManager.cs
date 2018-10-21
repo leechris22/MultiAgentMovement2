@@ -2,15 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Handles all Two Level Formation actions
-public class TwoLevelManager : LevelManager {
-    // Set prefabs
-    [SerializeField]
-    private GameObject PointPrefab;
-
+// Handles all Scalable Formation actions
+public class ScalableManager : LevelManager {
     // Formation creation
     [SerializeField]
-    private ScalableFormation formationFunction;
+    private Formation formationFunction;
     [SerializeField]
     private int size;
     [SerializeField]
@@ -25,7 +21,7 @@ public class TwoLevelManager : LevelManager {
     // On initialization
     private void Start() {
         // Get the formation creator
-        formationFunction = GetComponent<ScalableFormation>();
+        formationFunction = GetComponent<Formation>();
 
         // Initialize Boids
         Boids = new List<GameObject>();
@@ -40,7 +36,7 @@ public class TwoLevelManager : LevelManager {
     }
 
     // Update is called once per frame
-    private void Update() {
+    /*private void Update () {
         if (Input.GetKeyDown(KeyCode.Alpha1)) {
             foreach (GameObject Boid in Boids) {
                 Boid.GetComponent<PathFollow>().current = leader.GetComponent<PathFollow>().current;
@@ -54,7 +50,7 @@ public class TwoLevelManager : LevelManager {
                 Boid.GetComponent<MultiBehavior>().ai[1] = Boid.GetComponent<Align>();
             }
         }
-    }
+    }*/
 
     // Spawns Scalable Boids
     protected void SpawnBoid() {
@@ -62,10 +58,6 @@ public class TwoLevelManager : LevelManager {
         Vector3 position = BoidSpawner.transform.position + new Vector3(Random.Range(-size.x / 2, size.x / 2), Random.Range(-size.y / 2, size.y / 2), 0);
         GameObject temp = Instantiate(BoidPrefab, position, BoidSpawner.transform.rotation);
         temp.GetComponent<PathFollow>().path = Path.GetComponent<PathPlacer>().path;
-        foreach (GameObject Boid in Boids) {
-            Boid.GetComponent<Separate>().targets.Add(temp.GetComponent<NPCController>());
-            temp.GetComponent<Separate>().targets.Add(Boid.GetComponent<NPCController>());
-        }
         Boids.Add(temp);
     }
 
@@ -96,7 +88,7 @@ public class TwoLevelManager : LevelManager {
                 Destroy(Point);
             }
         }
-        formation = formationFunction.CreateFormation(size, spacing);
+        formation = formationFunction.CreateFormation(size, spacing, false);
 
         // Set the positions for each Boid on the formation except the leader
         List<GameObject> tempBoids = new List<GameObject>(Boids);
@@ -118,7 +110,7 @@ public class TwoLevelManager : LevelManager {
         }
     }
 
-    // Destroys Boid and change formation
+    // Destroys Boid and changes formation
     public void Reorganize(GameObject DeadBoid) {
         size--;
         Boids.Remove(DeadBoid);

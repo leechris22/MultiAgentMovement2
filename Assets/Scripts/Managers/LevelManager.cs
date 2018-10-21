@@ -19,6 +19,17 @@ public class LevelManager : MonoBehaviour {
     [SerializeField]
     protected GameObject Path;
 
+    // Update is called once per frame
+    protected void Update() {
+        if (Input.GetKeyDown(KeyCode.Alpha1)) {
+            SceneManager.LoadScene(0);
+        } else if (Input.GetKeyDown(KeyCode.Alpha2)) {
+            SceneManager.LoadScene(1);
+        } else if (Input.GetKeyDown(KeyCode.Alpha3)) {
+            SceneManager.LoadScene(2);
+        }
+    }
+
     // Show the spawn rectangle
     private void OnDrawGizmosSelected() {
         Gizmos.color = new Color(1, 0, 0, 0.5f);
