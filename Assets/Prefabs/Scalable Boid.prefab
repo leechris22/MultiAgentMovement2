@@ -332,7 +332,7 @@ MonoBehaviour:
     rotation: 0
   target: {fileID: 114779945359608674, guid: 4be2aae262aebaa41b1d44ccabee74d0, type: 2}
   ai: {fileID: 114639278999349954}
-  maxSpeedL: 5
-  maxAccelerationL: 5
+  maxSpeedL: 3
+  maxAccelerationL: 3
   maxSpeedA: 100
   maxAccelerationA: 100
