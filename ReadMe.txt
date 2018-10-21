@@ -26,7 +26,9 @@ including the leader itself. This will make sure that every Boid is connected to
 - The follower Boids call the Arrive, FaceForward, and Separate behaviors.
 
 Two Level Formation:
-- The
+- The leader is set as an intangible and invisible Boid that calls the Path Follow behavior.
+- The followers call the Arrive behavior on the formation Points and various other behaviors
+for general movement.
 
 1) What did you use for obstacle avoidance?
 

@@ -307,7 +307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61cea51f4884a45439fff8b78df4e160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 5
-  offset: 5
+  radius: 0
+  offset: 0
   avoidDistance: 5
   lookahead: 5

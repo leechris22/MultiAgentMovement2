@@ -291,10 +291,12 @@ MonoBehaviour:
   - 1
   - 1
   - 1
+  - 1
   ai:
   - {fileID: 114364798078375176}
   - {fileID: 114962373740343436}
   - {fileID: 114994745679330588}
+  - {fileID: 114889296833591276}
 --- !u!114 &114889296833591276
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -306,10 +308,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61cea51f4884a45439fff8b78df4e160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 5
-  offset: 5
-  avoidDistance: 5
-  lookahead: 5
+  radius: 0
+  offset: 0
+  avoidDistance: 3
+  lookahead: 3
 --- !u!114 &114962373740343436
 MonoBehaviour:
   m_ObjectHideFlags: 1
