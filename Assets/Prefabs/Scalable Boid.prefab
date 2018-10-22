@@ -47,8 +47,11 @@ GameObject:
   - component: {fileID: 114180423321868684}
   - component: {fileID: 114050171342473638}
   - component: {fileID: 114841682490309672}
-  - component: {fileID: 114218722214919806}
-  - component: {fileID: 114462122277040206}
+  - component: {fileID: 114688905438144642}
+  - component: {fileID: 114577625609465876}
+  - component: {fileID: 114395391005609700}
+  - component: {fileID: 114876171385290456}
+  - component: {fileID: 114705881622087678}
   m_Layer: 9
   m_Name: Scalable Boid
   m_TagString: Boid
@@ -225,6 +228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c2f254455e15d64ba7c510bf0c0cf7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  raycast: {fileID: 114577625609465876}
 --- !u!114 &114180423321868684
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -239,7 +243,7 @@ MonoBehaviour:
   slowRadiusA: 30
   stopRadiusA: 6
   timeToTarget: 0.1
---- !u!114 &114218722214919806
+--- !u!114 &114395391005609700
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -247,27 +251,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1046263664743266}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a32ce39f49905244bc6e7f353157ac4, type: 3}
+  m_Script: {fileID: 11500000, guid: b5e3e1628eefc8e4a988e5bd15714dab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slowRadiusA: 30
-  stopRadiusA: 6
-  timeToTarget: 0.1
---- !u!114 &114462122277040206
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1046263664743266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61cea51f4884a45439fff8b78df4e160, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 5
-  offset: 5
-  avoidDistance: 5
-  lookahead: 5
 --- !u!114 &114543682118050144
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -282,6 +268,21 @@ MonoBehaviour:
   slowRadiusL: 1
   stopRadiusL: 0
   timeToTarget: 0.1
+--- !u!114 &114577625609465876
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1046263664743266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 389f895d6874bca4e9dba1f2a673ac3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  avoidDistance: 5
+  lookahead: 5
+  radius: 0
+  offset: 0
 --- !u!114 &114639278999349954
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -299,6 +300,34 @@ MonoBehaviour:
   ai:
   - {fileID: 114543682118050144}
   - {fileID: 114180423321868684}
+--- !u!114 &114688905438144642
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1046263664743266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d9232892a3fe9a41aee330b6dec18cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slowRadiusA: 30
+  stopRadiusA: 6
+  timeToTarget: 0.1
+--- !u!114 &114705881622087678
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1046263664743266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dc84e0cda79f844abc88123e426e6ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  avoidDistance: 5
+  lookahead: 3
+  active: 1
 --- !u!114 &114841682490309672
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -313,6 +342,21 @@ MonoBehaviour:
   path: []
   pathRadius: 1
   current: 0
+--- !u!114 &114876171385290456
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1046263664743266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b62d4bcf19a42c4409ee655bc05552db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  avoidDistance: 0
+  lookahead: 3
+  active: 1
+  inTunnel: 0
 --- !u!114 &114951703711905126
 MonoBehaviour:
   m_ObjectHideFlags: 1
