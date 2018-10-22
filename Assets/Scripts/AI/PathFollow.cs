@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Moves the player along a path
-[RequireComponent(typeof(Arrive), typeof(FaceForward))]
+[RequireComponent(typeof(Arrive), typeof(Face))]
 public class PathFollow : AI {
     // Initialize necessary variables
     [HideInInspector]
@@ -25,7 +25,7 @@ public class PathFollow : AI {
         // Move to point until player reaches point, then target next point
         if (Vector2.Distance(path[current].position, player.data.position) > pathRadius) {
             steering += GetComponent<Arrive>().Output(path[current]);
-            steering += GetComponent<FaceForward>().Output(path[current]);
+            steering += GetComponent<Face>().Output(path[current]);
         } else {
             current++;
         }

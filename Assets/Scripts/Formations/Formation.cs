@@ -8,6 +8,8 @@ public class Formation : MonoBehaviour {
     // Initialize necessary variables
     [SerializeField]
     private GameObject PointPrefab;
+    [HideInInspector]
+    public float radius = 0;
 
     // Define base formation to create
     public GameObject[] CreateFormation(int size, float spacing, bool leader) {
@@ -16,7 +18,7 @@ public class Formation : MonoBehaviour {
             GameObject[] formation = new GameObject[size];
 
             // Create a regular polygon with 'size' vertices and 'spacing' side length
-            float radius = spacing / (2 * Mathf.Sin(Mathf.PI / size));
+            radius = spacing / (2 * Mathf.Sin(Mathf.PI / size));
             float orientation = 0;
             for (int i = 0; i < size; i++) {
                 float x = Mathf.Sin(Mathf.Deg2Rad * orientation) * radius;
@@ -30,7 +32,7 @@ public class Formation : MonoBehaviour {
             GameObject[] formation = new GameObject[size-1];
 
             // Create a regular polygon with 'size' vertices and 'spacing' side length
-            float radius = spacing / (2 * Mathf.Sin(Mathf.PI / size));
+            radius = spacing / (2 * Mathf.Sin(Mathf.PI / size));
             float orientation = 0;
             for (int i = 0; i < size-1; i++) {
                 orientation += 360 / size;

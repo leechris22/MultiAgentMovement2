@@ -9,8 +9,7 @@ public class ScalableManager : LevelManager {
     private Formation formationFunction;
     [SerializeField]
     private int size;
-    [SerializeField]
-    private float spacing;
+    public float spacing;
     private GameObject[] formation;
 
     // Leader
@@ -75,13 +74,14 @@ public class ScalableManager : LevelManager {
 
         // Set the leader and its behavior
         leader = closeBoid;
-        leader.GetComponent<NPCController>().ai = leader.GetComponent<RayCastPath>();
-        leader.GetComponent<PathFollow>().current = leaderIndex;
+        leader.GetComponent<MultiBehavior>().ai[0] = leader.GetComponent<RayCastPath>();
+        leader.GetComponent<MultiBehavior>().ai[1] = leader.GetComponent<RayCastTunnel>();
         leader.GetComponent<NPCController>().maxSpeedL /= 2;
+        leader.GetComponent<PathFollow>().current = leaderIndex;
     }
 
     // Sets the position of all Boids except the leader
-    private void SetFollowers() {
+    public void SetFollowers() {
         // Delete the old formation and create a new one
         if (formation != null) {
             foreach (GameObject Point in formation) {
@@ -89,6 +89,8 @@ public class ScalableManager : LevelManager {
             }
         }
         formation = formationFunction.CreateFormation(size, spacing, false);
+        leader.GetComponent<RayCastGroup>().radius = formationFunction.radius;
+        leader.GetComponent<RayCastGroup>().offset = formationFunction.radius;
 
         // Set the positions for each Boid on the formation except the leader
         List<GameObject> tempBoids = new List<GameObject>(Boids);
@@ -123,5 +125,19 @@ public class ScalableManager : LevelManager {
             SetFollowers();
         }
         Destroy(DeadBoid);
+    }
+
+    // Change the Boid behavior to move into the tunnel
+    public void TunnelOn() {
+        foreach (GameObject Boid in Boids) {
+            if (Boid != leader) {
+                Boid.GetComponent<PathFollow>().current = leader.GetComponent<PathFollow>().current - 12;
+                Boid.GetComponent<PathFollow>().GetNearest();
+                Boid.GetComponent<MultiBehavior>().ai[0] = Boid.GetComponent<PathFollow>();
+                Boid.GetComponent<MultiBehavior>().ai[1] = Boid.GetComponent<RayCastTunnel>();
+                Boid.GetComponent<RayCastTunnel>().active = false;
+                Boid.GetComponent<NPCController>().maxSpeedL /= 2;
+            }
+        }
     }
 }

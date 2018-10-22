@@ -2092,8 +2092,8 @@ MonoBehaviour:
     rotation: 0
   target: {fileID: 1373450247}
   ai: {fileID: 1373450242}
-  maxSpeedL: 5
-  maxAccelerationL: 5
+  maxSpeedL: 3
+  maxAccelerationL: 3
   maxSpeedA: 100
   maxAccelerationA: 100
 --- !u!50 &1373450248
