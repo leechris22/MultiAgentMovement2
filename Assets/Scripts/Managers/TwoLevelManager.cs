@@ -9,8 +9,7 @@ public class TwoLevelManager : LevelManager {
     private Formation formationFunction;
     [SerializeField]
     private int size;
-    [SerializeField]
-    private float spacing;
+    public float spacing;
     private GameObject[] formation;
 
     // Leader
@@ -33,28 +32,12 @@ public class TwoLevelManager : LevelManager {
         SetFollowers();
     }
 
-/*    // Update is called once per frame
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.Alpha1)) {
-            foreach (GameObject Boid in Boids) {
-                Boid.GetComponent<PathFollow>().current = leader.GetComponent<PathFollow>().current;
-                Boid.GetComponent<MultiBehavior>().ai[0] = Boid.GetComponent<PathFollow>();
-                Boid.GetComponent<MultiBehavior>().ai[1] = Boid.GetComponent<FaceForward>();
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2)) {
-            foreach (GameObject Boid in Boids) {
-                Boid.GetComponent<MultiBehavior>().ai[0] = Boid.GetComponent<Arrive>();
-                Boid.GetComponent<MultiBehavior>().ai[1] = Boid.GetComponent<Align>();
-            }
-        }
-    }*/
-
     // Spawns Scalable Boids
     protected void SpawnBoid() {
         Vector3 size = BoidSpawner.transform.localScale;
         Vector3 position = BoidSpawner.transform.position + new Vector3(Random.Range(-size.x / 2, size.x / 2), Random.Range(-size.y / 2, size.y / 2), 0);
         GameObject temp = Instantiate(BoidPrefab, position, BoidSpawner.transform.rotation);
+        temp.GetComponent<PathFollow>().path = Path.GetComponent<PathPlacer>().path;
         foreach (GameObject Boid in Boids) {
             Boid.GetComponent<Separate>().targets.Add(temp.GetComponent<NPCController>());
             temp.GetComponent<Separate>().targets.Add(Boid.GetComponent<NPCController>());
@@ -66,11 +49,10 @@ public class TwoLevelManager : LevelManager {
     private void SetLeader() {
         leader.GetComponent<PathFollow>().path = Path.GetComponent<PathPlacer>().path;
         leader.transform.position = BoidSpawner.transform.position;
-        leader.GetComponent<NPCController>().maxSpeedL /= 2;
     }
 
     // Sets the position of all Boids
-    private void SetFollowers() {
+    public void SetFollowers() {
         // Delete the old formation and create a new one
         if (formation != null) {
             foreach (GameObject Point in formation) {
@@ -106,5 +88,19 @@ public class TwoLevelManager : LevelManager {
             SetFollowers();
         }
         Destroy(DeadBoid);
+    }
+
+    // Change the Boid behavior to move into the tunnel
+    public void TunnelOn() {
+        foreach (GameObject Boid in Boids) {
+            Boid.GetComponent<PathFollow>().current = leader.GetComponent<PathFollow>().current - 12;
+            Boid.GetComponent<PathFollow>().GetNearest();
+            Boid.GetComponent<PathFollow>().current -= 5;
+            Boid.GetComponent<MultiBehavior>().ai[0] = Boid.GetComponent<PathFollow>();
+            Boid.GetComponent<MultiBehavior>().ai[1] = Boid.GetComponent<RayCastTunnel>();
+            Boid.GetComponent<MultiBehavior>().weights[3] = 0;
+            Boid.GetComponent<RayCastTunnel>().active = false;
+            Boid.GetComponent<NPCController>().maxSpeedL /= 2;
+        }
     }
 }

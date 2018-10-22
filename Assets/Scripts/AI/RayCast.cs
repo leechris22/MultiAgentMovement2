@@ -29,24 +29,13 @@ public class RayCast : AI {
         // Set up ray 3
         position = player.data.position - player.data.velocity.normalized;
         Vector2 direction = player.data.velocity - Vector2.Perpendicular(player.data.velocity);
-        RaycastHit2D hit3 = Physics2D.Raycast(position, direction, lookahead, layermask);
-        Debug.DrawRay(position, direction.normalized * (lookahead), Color.black);
+        RaycastHit2D hit3 = Physics2D.Raycast(position, direction, lookahead-2, layermask);
+        Debug.DrawRay(position, direction.normalized * (lookahead-2), Color.black);
 
         // Set up ray 4
         direction = player.data.velocity + Vector2.Perpendicular(player.data.velocity);
-        RaycastHit2D hit4 = Physics2D.Raycast(position, direction, lookahead, layermask);
-        Debug.DrawRay(position, direction.normalized * (lookahead), Color.black);
-
-        // Set up ray 5
-        position = player.data.position - player.data.velocity.normalized;
-        direction = player.data.velocity - Vector2.Perpendicular(player.data.velocity);
-        RaycastHit2D hit5 = Physics2D.Raycast(position, direction, lookahead, layermask);
-        Debug.DrawRay(position, direction.normalized * (lookahead), Color.black);
-
-        // Set up ray 6
-        direction = player.data.velocity + Vector2.Perpendicular(player.data.velocity);
-        RaycastHit2D hit6 = Physics2D.Raycast(position, direction, lookahead, layermask);
-        Debug.DrawRay(position, direction.normalized * (lookahead), Color.black);
+        RaycastHit2D hit4 = Physics2D.Raycast(position, direction, lookahead-2, layermask);
+        Debug.DrawRay(position, direction.normalized * (lookahead-2), Color.black);
 
         // Set up hit collision
         if (hit1.collider || hit2.collider || hit3.collider || hit4.collider) {
@@ -60,6 +49,7 @@ public class RayCast : AI {
         } else {
             return new Steering();
         }
+
         return GetComponent<Seek>().Output(target) + GetComponent<Face>().Output(target);
     }
 }

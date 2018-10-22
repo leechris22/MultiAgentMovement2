@@ -25,23 +25,6 @@ public class EmergentManager : LevelManager {
         SetFollowers();
     }
 
-    // Update is called once per frame
-    /*private void Update() {
-        if (Input.GetKeyDown(KeyCode.Alpha1)) {
-            foreach (GameObject Boid in Boids) {
-                Boid.GetComponent<PathFollow>().current = leader.GetComponent<PathFollow>().current;
-                Boid.GetComponent<MultiBehavior>().ai[0] = Boid.GetComponent<PathFollow>();
-                Boid.GetComponent<MultiBehavior>().ai[1] = Boid.GetComponent<FaceForward>();
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2)) {
-            foreach (GameObject Boid in Boids) {
-                Boid.GetComponent<MultiBehavior>().ai[0] = Boid.GetComponent<Arrive>();
-                Boid.GetComponent<MultiBehavior>().ai[1] = Boid.GetComponent<Align>();
-            }
-        }
-    }*/
-
     // Spawns Scalable Boids
     protected void SpawnBoid() {
         Vector3 size = BoidSpawner.transform.localScale;
@@ -66,8 +49,11 @@ public class EmergentManager : LevelManager {
         }
 
         // Set the leader behavior
+        leader.GetComponent<MultiBehavior>().ai[0] = leader.GetComponent<RayCastPath>();
+        leader.GetComponent<MultiBehavior>().ai[1] = leader.GetComponent<RayCastTunnel>();
+        leader.GetComponent<MultiBehavior>().weights[2] = 0;
+        leader.GetComponent<MultiBehavior>().weights[3] = 0;
         leader.GetComponent<NPCController>().target = leader.GetComponent<NPCController>();
-        leader.GetComponent<NPCController>().ai = leader.GetComponent<RayCastPath>();
         leader.GetComponent<PathFollow>().current = leaderIndex;
     }
 
@@ -136,5 +122,20 @@ public class EmergentManager : LevelManager {
             SetNoTargets(DeadBoid.GetComponent<NPCController>());
         }
         Destroy(DeadBoid);
+    }
+
+    // Change the Boid behavior to move into the tunnel
+    public void TunnelOn() {
+        foreach (GameObject Boid in Boids) {
+            if (Boid != leader) {
+                Boid.GetComponent<PathFollow>().current = leader.GetComponent<PathFollow>().current - 12;
+                Boid.GetComponent<PathFollow>().GetNearest();
+                Boid.GetComponent<MultiBehavior>().ai[0] = Boid.GetComponent<PathFollow>();
+                Boid.GetComponent<MultiBehavior>().ai[1] = Boid.GetComponent<RayCastTunnel>();
+                Boid.GetComponent<MultiBehavior>().weights[3] = 0;
+                Boid.GetComponent<RayCastTunnel>().active = false;
+                Boid.GetComponent<NPCController>().maxSpeedL /= 2;
+            }
+        }
     }
 }

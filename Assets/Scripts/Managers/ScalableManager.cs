@@ -34,23 +34,6 @@ public class ScalableManager : LevelManager {
         SetFollowers();
     }
 
-    // Update is called once per frame
-    /*private void Update () {
-        if (Input.GetKeyDown(KeyCode.Alpha1)) {
-            foreach (GameObject Boid in Boids) {
-                Boid.GetComponent<PathFollow>().current = leader.GetComponent<PathFollow>().current;
-                Boid.GetComponent<MultiBehavior>().ai[0] = Boid.GetComponent<PathFollow>();
-                Boid.GetComponent<MultiBehavior>().ai[1] = Boid.GetComponent<FaceForward>();
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2)) {
-            foreach (GameObject Boid in Boids) {
-                Boid.GetComponent<MultiBehavior>().ai[0] = Boid.GetComponent<Arrive>();
-                Boid.GetComponent<MultiBehavior>().ai[1] = Boid.GetComponent<Align>();
-            }
-        }
-    }*/
-
     // Spawns Scalable Boids
     protected void SpawnBoid() {
         Vector3 size = BoidSpawner.transform.localScale;
@@ -89,8 +72,8 @@ public class ScalableManager : LevelManager {
             }
         }
         formation = formationFunction.CreateFormation(size, spacing, false);
-        leader.GetComponent<RayCastGroup>().radius = formationFunction.radius;
-        leader.GetComponent<RayCastGroup>().offset = formationFunction.radius;
+        leader.GetComponent<RayCastGroup>().radius = Mathf.Max(formationFunction.radius,1);
+        leader.GetComponent<RayCastGroup>().offset = Mathf.Max(formationFunction.radius, 1);
 
         // Set the positions for each Boid on the formation except the leader
         List<GameObject> tempBoids = new List<GameObject>(Boids);

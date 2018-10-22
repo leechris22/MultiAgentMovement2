@@ -47,6 +47,10 @@ GameObject:
   - component: {fileID: 114922811130692636}
   - component: {fileID: 114811173362446618}
   - component: {fileID: 114961898215613494}
+  - component: {fileID: 114641948122497052}
+  - component: {fileID: 114240549685160820}
+  - component: {fileID: 114407705629367578}
+  - component: {fileID: 114328961345568544}
   m_Layer: 9
   m_Name: Two Level Boid
   m_TagString: Boid
@@ -226,6 +230,49 @@ MonoBehaviour:
   slowRadiusL: 1
   stopRadiusL: 0
   timeToTarget: 0.1
+--- !u!114 &114240549685160820
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1991953426895768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d9232892a3fe9a41aee330b6dec18cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slowRadiusA: 30
+  stopRadiusA: 6
+  timeToTarget: 0.1
+--- !u!114 &114328961345568544
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1991953426895768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b62d4bcf19a42c4409ee655bc05552db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  avoidDistance: 0
+  lookahead: 3
+  active: 1
+  inTunnel: 0
+--- !u!114 &114407705629367578
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1991953426895768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e447b051289aa847bcccf144cd2361b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  path: []
+  pathRadius: 1
+  current: 0
 --- !u!114 &114484673177758498
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -249,6 +296,17 @@ MonoBehaviour:
   maxAccelerationL: 3
   maxSpeedA: 100
   maxAccelerationA: 100
+--- !u!114 &114641948122497052
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1991953426895768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5e3e1628eefc8e4a988e5bd15714dab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114742928357490542
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -264,10 +322,12 @@ MonoBehaviour:
   - 1
   - 1
   - 1
+  - 5
   ai:
   - {fileID: 114122001761052224}
   - {fileID: 114922811130692636}
   - {fileID: 114811173362446618}
+  - {fileID: 114961898215613494}
 --- !u!114 &114811173362446618
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -307,7 +367,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61cea51f4884a45439fff8b78df4e160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0
-  offset: 0
   avoidDistance: 5
   lookahead: 5
